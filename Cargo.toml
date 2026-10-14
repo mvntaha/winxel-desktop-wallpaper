@@ -1,16 +1,16 @@
 [package]
-name = "winxel"
+name = "winxel-desktop-wallpaper"
 version = "0.1.0"
-edition = "2024"
+edition = "2026"
 license = "MIT"
-description = "Pixel-art live wallpaper for Windows"
+description = "custom pixel-art live wallpaper for windows"
 
 [dependencies]
-# Decodes the 640x360 plates and sprite PNGs; a hand-rolled inflate isn't worth it.
+# decodes the 640x360 plates and sprite PNGs
 png = "0.18"
-# TTF rasterizer for the UI font (glyph atlas built once at startup, thresholded to 1-bit).
+# TTF rasterizer for the UI font
 fontdue = "0.9"
-# config.toml parsing into a plain table. Its Table/Value types sit behind the "serde"
+# config.toml parsing into a plain table.
 # feature (pulls serde core only, no derive macros).
 toml = { version = "1", default-features = false, features = ["std", "parse", "serde"] }
 
