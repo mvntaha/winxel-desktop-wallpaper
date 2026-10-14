@@ -1,0 +1,37 @@
+{
+  "girl": {
+    "regions": {
+      "girl_torso": { "mask": "girl_torso_mask.png" },
+      "girl_hands": { "rects": [[112, 278, 72, 36]] },
+      "girl_ears": { "mask": "girl_ears_mask.png" }
+    },
+    "procedural": [
+      { "region": "girl_torso", "pattern": "sine", "offset": [0, -1], "period_ms": 4000 },
+      { "region": "girl_hands", "pattern": "steps", "offsets": [[0, 0], [0, 1]], "step_ms": 150 }
+    ],
+    "frames": [
+      { "name": "blink", "image": "girl_blink.png", "at": [120, 84], "duration_ms": 150, "interval_ms": [3000, 7000] }
+    ],
+    "triggers": [
+      { "on": "hover", "region": "girl_ears", "offsets": [[0, -1], [0, 0], [0, -1]], "step_ms": 100, "cooldown_ms": 3000 }
+    ]
+  },
+  "cat": {
+    "regions": {
+      "cat_body": { "mask": "cat_body_mask.png" },
+      "cat_tail": { "mask": "cat_tail_mask.png" }
+    },
+    "procedural": [
+      { "region": "cat_body", "pattern": "sine", "offset": [0, -1], "period_ms": 3000, "phase_ms": 700 }
+    ],
+    "triggers": [
+      { "on": "hover", "region": "cat_tail", "offsets": [[-1, 0], [0, 0], [1, 0], [0, 0]], "step_ms": 100, "cooldown_ms": 3000 },
+      { "on": "click", "effect": "heart" }
+    ]
+  },
+  "ambient": {
+    "night_threshold": 0.6,
+    "neon": { "rects": [[328, 98, 26, 122], [240, 18, 38, 36]], "dim": 0.45, "interval_ms": [4000, 12000], "ticks": [1, 2] },
+    "shimmer": { "rects": [[600, 175, 80, 110], [715, 190, 80, 120], [236, 70, 40, 120]], "every": 4, "amount": 0.22, "period_ms": 8000, "step_ms": 1000 }
+  }
+}
