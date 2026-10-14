@@ -1,0 +1,52 @@
+[package]
+name = "winxel"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "Pixel-art live wallpaper for Windows"
+
+[dependencies]
+# Decodes the 640x360 plates and sprite PNGs; a hand-rolled inflate isn't worth it.
+png = "0.18"
+# TTF rasterizer for the UI font (glyph atlas built once at startup, thresholded to 1-bit).
+fontdue = "0.9"
+# config.toml parsing into a plain table. Its Table/Value types sit behind the "serde"
+# feature (pulls serde core only, no derive macros).
+toml = { version = "1", default-features = false, features = ["std", "parse", "serde"] }
+
+[dependencies.windows]
+# 0.58 is the newest that ships prebuilt GNU import libs (windows-targets 0.52).
+# 0.61+ uses raw-dylib, which needs dlltool + GNU `as` -- unavailable on this machine (see .cargo/config.toml).
+version = "0.58"
+features = [
+    # WinRT: Windows.Media.Control (GSMTC) for the music bar.
+    "Foundation",
+    "Media_Control",
+    "Win32_System_WinRT",
+    "Win32_Foundation",
+    "Win32_Graphics_Dwm",
+    "Win32_Graphics_Gdi",
+    "Win32_Media_Audio",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Power",
+    "Win32_System_Registry",
+    "Win32_System_RemoteDesktop",
+    "Win32_System_SystemServices",
+    "Win32_System_SystemInformation",
+    "Win32_Security",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+    "Win32_System_Threading",
+    "Win32_UI_Accessibility",
+    "Win32_UI_HiDpi",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
